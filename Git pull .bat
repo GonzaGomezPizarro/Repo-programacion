@@ -18,5 +18,5 @@ echo ----------------------------------------
 echo - Proceso finalizado... revise errores -
 echo ----------------------------------------
 echo.
-echo  Presione una tecla para continuar...
+echo  Presione una tecla para finalizar...
 pause>nul
