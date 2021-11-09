@@ -6,6 +6,18 @@ echo -   HOLA, ejecutando comandos...   -
 echo ------------------------------------
 
 echo.
+echo --------------------
+echo -    git status    -
+echo --------------------
+git status
+echo.
+echo ----------------------------------------------------------------------------------
+echo  -   Seguro desea agregar estos cambios??
+echo  -   Presione cualquier tecla para agregar o cierre el programa para cancelar 
+echo ----------------------------------------------------------------------------------
+pause>nul
+
+echo.
 echo -------------------
 echo -    git add .    -
 echo -------------------
