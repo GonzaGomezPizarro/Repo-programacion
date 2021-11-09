@@ -7,27 +7,20 @@ echo ------------------------------------
 
 echo.
 echo -------------------
-echo -    GIT ADD .    -
+echo -    git add .    -
 echo -------------------
 git add .
 
 echo.
 echo -------------------
-echo -  GIT COMMIT -M  - 
+echo -  git commit -m  - 
 echo -------------------
 echo.
 git commit -m "Repositorio atualizado"
 
 echo.
 echo --------------------
-echo -     GIT PULL     -
-echo --------------------
-echo.
-git pull
-
-echo.
-echo --------------------
-echo -     GIT PUSH     -
+echo -     git push     -
 echo --------------------
 echo.
 git push
