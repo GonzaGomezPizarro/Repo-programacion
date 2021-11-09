@@ -1,9 +1,9 @@
 @echo off
 title GIT AUTOMATICO (add, commit, pull, push)...
 echo.
-echo ------------------------------------
-echo -   HOLA, ejecutando comandos...   -
-echo ------------------------------------
+echo -----------------------------------
+echo -             HOLA                -
+echo -----------------------------------
 
 echo.
 echo --------------------
@@ -16,6 +16,7 @@ echo  -   Seguro desea agregar estos cambios??
 echo  -   Presione cualquier tecla para agregar o cierre el programa para cancelar 
 echo ----------------------------------------------------------------------------------
 pause>nul
+echo  - Ejecutando comandos...
 
 echo.
 echo -------------------
