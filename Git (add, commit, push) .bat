@@ -1,5 +1,5 @@
 @echo off
-title GIT AUTOMATICO (add, commit, pull, push)...
+title GIT AUTOMATICO (add, commit, push)...
 echo.
 echo -----------------------------------
 echo -             HOLA                -
