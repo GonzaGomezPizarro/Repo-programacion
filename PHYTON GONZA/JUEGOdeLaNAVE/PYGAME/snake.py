@@ -1,22 +1,25 @@
 # snake game
+from os import system
+from turtle import screensize
 import pygame, sys
 from pygame.colordict import THECOLORS
 from pygame.locals import *
 from random import randint
-ancho, alto, gap = 1400, 800, 10
-
+import ctypes
+user32 = ctypes.windll.user32
+ancho, alto = round(int(user32.GetSystemMetrics(0)),-1), round(int(user32.GetSystemMetrics(1)),-1)
+gap =  10
 
 
 class Snake:
     pos_cabeza = [gap*3,gap]
     __direccion = 'derecha' # derecha, izquierda, arriba, abajo
-    vidas = 3
     cuerpo = [[gap*2,gap],[gap,gap]]
-    borrador = [0,gap]
+    tamaño = 3
+
     def crecer (this):
         ultimo = len(this.cuerpo)-1
-        nuevo = [0,0]
-        this.cuerpo.append( this.borrador)
+
         if (this.cuerpo[ultimo][0] == this.cuerpo[ultimo-1][0]): # la cola se mueve o para arriba o para abajo
             if (this.cuerpo[ultimo][1] > this.cuerpo[ultimo-1][1]): # la cola se mueve hacia arriba
                 nuevo = [this.cuerpo[ultimo][0], this.cuerpo[ultimo][1] + gap]
@@ -27,11 +30,23 @@ class Snake:
                 nuevo = [this.cuerpo[ultimo][0] + gap, this.cuerpo[ultimo][1]]
             else: # la cola se mueve hacia la derecha
                 nuevo = [this.cuerpo[ultimo][0] - gap, this.cuerpo[ultimo][1]]
-        this.borrador = nuevo
-    def chocar (this):
-        this.vidas -= 1
+        
+        this.cuerpo.append(nuevo)
+
+    def control_choque (this):
+
+        return this.pos_cabeza in this.cuerpo
+
     def cambiar_direccion (this, direccion):
-        this.__direccion = direccion
+        if direccion == 'derecha' and this.__direccion != 'izquierda':
+            this.__direccion = 'derecha'
+        elif direccion == 'izquierda' and this.__direccion != 'derecha':
+            this.__direccion = 'izquierda'
+        elif direccion == 'arriba' and this.__direccion != 'abajo':
+            this.__direccion = 'arriba'
+        elif direccion == 'abajo' and this.__direccion != 'arriba':
+            this.__direccion = 'abajo'
+
     def avanzar (this):
         this.borrador = this.cuerpo[len(this.cuerpo)-1]
         this.__avanzar_cuerpo()
@@ -44,10 +59,12 @@ class Snake:
         elif this.__direccion == 'abajo':
             this.pos_cabeza[1] += gap
 
-    def __avanzar_cuerpo (self):
-        for i in range(len(self.cuerpo)-1, 0, -1):
-            self.cuerpo[i] = self.cuerpo[i-1]
-        self.cuerpo[0] = self.pos_cabeza
+        this.pos_cabeza[0] = this.pos_cabeza[0] % ancho
+        this.pos_cabeza[1] = this.pos_cabeza[1] % alto
+
+    def __avanzar_cuerpo (self): # el ultimo copia la posicion de la cabeza
+        self.cuerpo[-1] = self.pos_cabeza.copy()
+        self.cuerpo.insert(0,self.cuerpo.pop())
     
 
 
@@ -55,7 +72,7 @@ class Snake:
 class food: 
     pos = [[randint(0,ancho/gap)*gap,randint(0,alto/gap)*gap]]
     def __init__(self):
-        for i in range(4):
+        for i in range(999):
             self.pos.append([randint(0,ancho/gap)*gap, randint(0,alto/gap)*gap])
     def nueva_comida(self, x):
         self.pos[x] = [randint(0,ancho/gap)*gap, randint(0,alto/gap)*gap]
@@ -65,20 +82,23 @@ vibora = Snake()
 comida = food()
 
 pygame.init()
-ventana = pygame.display.set_mode((ancho,alto)) # ,pygame.FULLSCREEN
+ventana = pygame.display.set_mode((ancho,alto),pygame.FULLSCREEN) # 
 
-print (vibora.borrador)
+while True:
 
-while vibora.vidas > 0:
+    if vibora.control_choque():
+        break
+    
     ventana.fill(THECOLORS["black"])
-    pygame.time.delay(75)
-    vibora.avanzar()
-    for i in range(len(comida.pos)):
-        pygame.draw.rect(ventana, THECOLORS["darkgoldenrod"], [comida.pos[i][0], comida.pos[i][1], gap, gap])
-    for i in range(len(vibora.cuerpo)):
-        pygame.draw.rect(ventana, THECOLORS["white"], (vibora.cuerpo[i][0], vibora.cuerpo[i][1], gap, gap))
-    pygame.draw.rect(ventana, THECOLORS["darkred"], (vibora.pos_cabeza[0], vibora.pos_cabeza[1], gap, gap))
-    for i in range(5):
+    for i in range(len(comida.pos)): # dibujar comida
+        pygame.draw.circle(ventana,THECOLORS["darkgoldenrod"],(comida.pos[i][0]+gap/2, comida.pos[i][1]+gap/2),gap/2) # circulos
+
+    pygame.draw.circle(ventana,THECOLORS["darkred"],(vibora.pos_cabeza[0]+gap/2,vibora.pos_cabeza[1]+gap/2),gap/2) # circulo cabeza
+
+    for i in range(len(vibora.cuerpo)): # dibujar cuerpo
+        pygame.draw.circle(ventana,THECOLORS["white"],(vibora.cuerpo[i][0]+gap/2, vibora.cuerpo[i][1]+gap/2),gap/2) # circulos
+
+    for i in range(1000):
         if vibora.pos_cabeza == comida.pos[i]:
             vibora.crecer()
             comida.nueva_comida(i)
@@ -95,4 +115,19 @@ while vibora.vidas > 0:
                 vibora.cambiar_direccion('arriba')
             if evento.key == pygame.K_DOWN:
                 vibora.cambiar_direccion('abajo')
+            if evento.key == pygame.K_ESCAPE:
+                ventana = pygame.display.set_mode((ancho,alto)) 
+            if evento.key == pygame.K_F11:
+                ventana = pygame.display.set_mode((ancho,alto),pygame.FULLSCREEN)
+            if evento.key == pygame.K_p:
+                control = True
+                while control:
+                    for evento in pygame.event.get():
+                        if evento.type == pygame.KEYDOWN:
+                            if evento.key == pygame.K_p:
+                                control = False
+                                break
+
+    vibora.avanzar()
+    pygame.time.delay(10)
     pygame.display.update()
