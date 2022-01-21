@@ -1,7 +1,6 @@
 # clase 1;
 import string
 from turtle import color
-from xml.etree.ElementTree import tostring
 
 from numpy import size
 import funciones

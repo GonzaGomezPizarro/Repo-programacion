@@ -36,3 +36,7 @@ def graficar (ticker, desde="2010-01-01"):
     plt.show()
   except:
     raise ValueError("404")
+
+def pct_change (data):
+  data["pct_change"] = data["Close"].pct_change()*100
+  return
