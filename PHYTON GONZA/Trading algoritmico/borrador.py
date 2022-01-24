@@ -12,3 +12,5 @@ data.index = ["Lunes","Martes","Miercoles","Jueves","Viernes"]
 data = data.T
 print(data)
 plt.show()
+
+#variaciones = yf.download (["","AAPL","GE","AMX"], auto_adjust=True)["Close"].pct_change().dropna()
