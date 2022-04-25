@@ -1,9 +1,12 @@
 body{
     background-color: black;
-    font-family:'Zen Dots', cursive;
+    font-family: 'Shadows Into Light','Teko', cursive;
     font-size: 14px;
     color: white;
     text-align: center;  
-    padding: 5%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 25%;
+    padding-right: 25%;
 
 }
