@@ -8,7 +8,7 @@ from random import randint
 import ctypes
 user32 = ctypes.windll.user32
 ancho, alto = round(int(user32.GetSystemMetrics(0)),-1), round(int(user32.GetSystemMetrics(1)),-1)
-gap =  10
+gap =  20
 
 
 class Snake:
@@ -72,7 +72,7 @@ class Snake:
 class food: 
     pos = [[randint(0,ancho/gap)*gap,randint(0,alto/gap)*gap]]
     def __init__(self):
-        for i in range(999):
+        for i in range(99):
             self.pos.append([randint(0,ancho/gap)*gap, randint(0,alto/gap)*gap])
     def nueva_comida(self, x):
         self.pos[x] = [randint(0,ancho/gap)*gap, randint(0,alto/gap)*gap]
@@ -98,7 +98,7 @@ while True:
     for i in range(len(vibora.cuerpo)): # dibujar cuerpo
         pygame.draw.circle(ventana,THECOLORS["white"],(vibora.cuerpo[i][0]+gap/2, vibora.cuerpo[i][1]+gap/2),gap/2) # circulos
 
-    for i in range(1000):
+    for i in range(100):
         if vibora.pos_cabeza == comida.pos[i]:
             vibora.crecer()
             comida.nueva_comida(i)
@@ -127,7 +127,6 @@ while True:
                             if evento.key == pygame.K_p:
                                 control = False
                                 break
-
     vibora.avanzar()
-    pygame.time.delay(10)
+    pygame.time.delay(80)
     pygame.display.update()
