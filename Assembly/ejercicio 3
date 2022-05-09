@@ -1,0 +1,14 @@
+		;Practico	5
+		;Ejercicio	3
+		;ejecucion	incondicional
+		MOV		R0,#7
+		MOV		R1,#5
+		
+		CMP		R0,R1
+		BLT		nombre
+		ADD		R0,R0,R1
+		B		nombre2
+nombre
+		SUB		R0,R0,R1
+nombre2
+		end
