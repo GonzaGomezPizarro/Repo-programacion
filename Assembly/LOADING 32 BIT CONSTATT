@@ -1,0 +1,4 @@
+		;		MAX VALUE = 8 BIT  = 255
+		LDR		R0, =2147483647 ;LD (LOAD) R (REGISTER)
+		;		el limite es ahora 32 bits
+; maximo registro =2147483647 y -2147483648
