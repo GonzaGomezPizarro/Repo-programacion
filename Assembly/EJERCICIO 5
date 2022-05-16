@@ -1,0 +1,10 @@
+		;		EJ 5
+		MOV		R4,#10
+		ADD		R10,R4,R4, LSL #5 ; R4 + R4 * (2^5) = 33 R4
+		ADD		R10,R10,R4, LSL #1 ; R10 + R4*2 = 35 R4
+		
+		;		SOLUCION 2
+		ADD		R9,R4,R4, LSL #2 ; R4 + R4 * (2^2) = 5 R4
+		RSB		R9,R9, R9, LSL #3 ; R9*(2^3) - R9 = 7 R9 = 35R4
+		
+		

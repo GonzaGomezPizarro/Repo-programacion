@@ -1,7 +1,7 @@
 		;		Pasar parametro x funcion...
 		;		if		(a==0) func(131); =
 		CMP		R0, #0
-		MOVEQ	R0, #131 ; se suele usar R0 para pasr parametros
+		MOVEQ	R0, #1 ; se suele usar R0 para pasr parametros
 		BLEQ		func ; Branch- link -equal
 func
 		;		...
@@ -19,7 +19,7 @@ func
 		MOV		R0,R0,ROR #31 ; MULTIPLICAR X 2
 		;
 		MOV		R0,R0,ROR #1 ; DIVIDIR X 2
-
+		
 		
 		
 		END
