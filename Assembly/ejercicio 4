@@ -1,0 +1,21 @@
+		mov		r0, #tabla
+		mov		r1, #0
+loop
+		ldr		r2,[r0], #4
+		add		r1,r1,#1
+		
+		cmp		r2, #42
+		subeq	r0,r0,#4
+		moveq	r3,r0
+		beq		endd
+		
+		cmp		r1,#250
+		bne		loop
+		mov		r3,#-1
+endd
+		;cmp		r3,#0x100
+		;ldrge	r2,[r3]
+		
+tabla	dcd		424,24,13,2,5,6,7,8,9,10,72,4,5,7,8,7,4
+		
+		end
