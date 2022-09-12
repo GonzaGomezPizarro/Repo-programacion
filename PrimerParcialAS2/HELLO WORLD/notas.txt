@@ -1,0 +1,1 @@
+Correr el recieve.py (queda corriendo) y mandar mensaje con el send.py, o desde consola usando python
