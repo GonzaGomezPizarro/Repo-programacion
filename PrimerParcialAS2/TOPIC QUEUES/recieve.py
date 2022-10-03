@@ -5,7 +5,7 @@ connection = pika.BlockingConnection(
     pika.ConnectionParameters(host='localhost'))
 channel = connection.channel()
 
-channel.exchange_declare(exchange='topicss', exchange_type='topic')
+channel.exchange_declare(exchange='topicss', exchange_type='topic') #debe coincidir el nombre del exchange
 
 help = channel.queue_declare('', exclusive=True)
 nombreCola = help.method.queue
@@ -16,8 +16,8 @@ if not claves:
     sys.exit(1)
 
 for clave in claves:
-    channel.queue_bind(
-        exchange='topicss', queue=nombreCola, routing_key=clave)
+    channel.queue_bind(exchange='topicss', queue=nombreCola, routing_key=clave)
+
     if clave == "#":
         print (" -> Escuchando todos los TOPICs")
     else:
