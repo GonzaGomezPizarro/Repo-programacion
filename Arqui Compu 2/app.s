@@ -10,10 +10,6 @@ app:
 	
 	//---------------- Main code --------------------
 	// X0 contiene la dirección base del framebuffer (NO MODIFICAR)
-loopx:
-	b escenario
-loop:
-	b esperar
 	
 	mov w3, 0xF800    	// 0xF800 = ROJO	
 	add x10, x0, 0		// X10 contiene la dirección base del framebuffer
@@ -28,9 +24,20 @@ loop0:
 	cbnz x1,loop0	   	// Si no terminó la fila, saltar
 	sub x2,x2,1	   		// Decrementar el contador Y
 	cbnz x2,loop1	  	// Si no es la última fila, saltar
-//	b escuchar
-//	b avanzarYdibujar
-//	bnz x20, loop
+	
+	// --- Delay loop ---
+	movz x11, 0x10, lsl #16
+delay1: 
+	sub x11,x11,#1
+	cbnz x11, delay1
+	// ------------------
+		
+	bl inputRead		// Leo el GPIO17 y lo guardo en x21
+	mov w3, 0x001F    	// 0x001F = AZUL	
+	add x10, x0, 0		// X10 contiene la dirección base del framebuffer
+	cbz X22, loop2
+	mov w3, 0x07E0    	// 0x07E0 = VERDE			
+	b loop2
 	
 	// --- Infinite Loop ---	
 InfLoop: 

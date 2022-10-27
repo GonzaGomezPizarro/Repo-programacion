@@ -16453,184 +16453,300 @@ Disassembly of section .text:
    100ac:	52a7e414 	mov	w20, #0x3f200000            	// #1059061760
    100b0:	d2800015 	mov	x21, #0x0                   	// #0
    100b4:	b9000695 	str	w21, [x20, #4]
+   100b8:	14000002 	b	100c0 <escenario>
 
-00000000000100b8 <loopx>:
-   100b8:	1400000d 	b	100ec <escenario>
+00000000000100bc <InfLoop>:
+   100bc:	14000000 	b	100bc <InfLoop>
 
-00000000000100bc <loop>:
-   100bc:	14000070 	b	1027c <esperar>
-   100c0:	529f0003 	mov	w3, #0xf800                	// #63488
+00000000000100c0 <escenario>:
+   100c0:	52800003 	mov	w3, #0x0                   	// #0
    100c4:	9100000a 	add	x10, x0, #0x0
-
-00000000000100c8 <loop2>:
    100c8:	d2804002 	mov	x2, #0x200                 	// #512
 
-00000000000100cc <loop1>:
+00000000000100cc <lesc1>:
    100cc:	d2804001 	mov	x1, #0x200                 	// #512
 
-00000000000100d0 <loop0>:
+00000000000100d0 <lesc0>:
    100d0:	78000143 	sturh	w3, [x10]
    100d4:	9100094a 	add	x10, x10, #0x2
    100d8:	d1000421 	sub	x1, x1, #0x1
-   100dc:	b5ffffa1 	cbnz	x1, 100d0 <loop0>
+   100dc:	b5ffffa1 	cbnz	x1, 100d0 <lesc0>
    100e0:	d1000442 	sub	x2, x2, #0x1
-   100e4:	b5ffff42 	cbnz	x2, 100cc <loop1>
+   100e4:	b5ffff42 	cbnz	x2, 100cc <lesc1>
+   100e8:	529fffe3 	mov	w3, #0xffff                	// #65535
+   100ec:	9120100a 	add	x10, x0, #0x804
+   100f0:	9120114a 	add	x10, x10, #0x804
+   100f4:	9120114a 	add	x10, x10, #0x804
+   100f8:	9120114a 	add	x10, x10, #0x804
+   100fc:	d28007a2 	mov	x2, #0x3d                  	// #61
+   10100:	d28007c1 	mov	x1, #0x3e                  	// #62
 
-00000000000100e8 <InfLoop>:
-   100e8:	14000000 	b	100e8 <InfLoop>
+0000000000010104 <escbranch>:
+   10104:	1400003d 	b	101f8 <escpintarbloque>
 
-00000000000100ec <escenario>:
-   100ec:	52800003 	mov	w3, #0x0                   	// #0
-   100f0:	9100000a 	add	x10, x0, #0x0
-   100f4:	d2804002 	mov	x2, #0x200                 	// #512
+0000000000010108 <esccontinuar>:
+   10108:	d1000421 	sub	x1, x1, #0x1
+   1010c:	9100414a 	add	x10, x10, #0x10
+   10110:	b5ffffa1 	cbnz	x1, 10104 <escbranch>
+   10114:	d100414a 	sub	x10, x10, #0x10
 
-00000000000100f8 <lesc1>:
-   100f8:	d2804001 	mov	x1, #0x200                 	// #512
+0000000000010118 <escbranch2>:
+   10118:	9120014a 	add	x10, x10, #0x800
+   1011c:	9120014a 	add	x10, x10, #0x800
+   10120:	9120014a 	add	x10, x10, #0x800
+   10124:	9120014a 	add	x10, x10, #0x800
+   10128:	d1000442 	sub	x2, x2, #0x1
+   1012c:	f100085f 	cmp	x2, #0x2
+   10130:	5400080c 	b.gt	10230 <escpintarbloque2>
 
-00000000000100fc <lesc0>:
-   100fc:	78000143 	sturh	w3, [x10]
-   10100:	9100094a 	add	x10, x10, #0x2
-   10104:	d1000421 	sub	x1, x1, #0x1
-   10108:	b5ffffa1 	cbnz	x1, 100fc <lesc0>
-   1010c:	d1000442 	sub	x2, x2, #0x1
-   10110:	b5ffff42 	cbnz	x2, 100f8 <lesc1>
-   10114:	529fffe3 	mov	w3, #0xffff                	// #65535
-   10118:	9120100a 	add	x10, x0, #0x804
-   1011c:	9120114a 	add	x10, x10, #0x804
-   10120:	9120114a 	add	x10, x10, #0x804
-   10124:	9120114a 	add	x10, x10, #0x804
-   10128:	d28007a2 	mov	x2, #0x3d                  	// #61
-   1012c:	d28007c1 	mov	x1, #0x3e                  	// #62
+0000000000010134 <esccontinuar2>:
+   10134:	b5ffff22 	cbnz	x2, 10118 <escbranch2>
+   10138:	d28007a1 	mov	x1, #0x3d                  	// #61
 
-0000000000010130 <escbranch>:
-   10130:	1400001a 	b	10198 <escpintarbloque>
+000000000001013c <escbranch3>:
+   1013c:	1400004b 	b	10268 <escpintarbloque3>
 
-0000000000010134 <esccontinuar>:
-   10134:	d1000421 	sub	x1, x1, #0x1
-   10138:	9100414a 	add	x10, x10, #0x10
-   1013c:	b5ffffa1 	cbnz	x1, 10130 <escbranch>
-   10140:	d100414a 	sub	x10, x10, #0x10
+0000000000010140 <esccontinuar3>:
+   10140:	d1000421 	sub	x1, x1, #0x1
+   10144:	d100414a 	sub	x10, x10, #0x10
+   10148:	b5ffffa1 	cbnz	x1, 1013c <escbranch3>
+   1014c:	d2800762 	mov	x2, #0x3b                  	// #59
 
-0000000000010144 <escbranch2>:
-   10144:	9120014a 	add	x10, x10, #0x800
-   10148:	9120014a 	add	x10, x10, #0x800
-   1014c:	9120014a 	add	x10, x10, #0x800
-   10150:	9120014a 	add	x10, x10, #0x800
-   10154:	d1000442 	sub	x2, x2, #0x1
-   10158:	1400001e 	b	101d0 <escpintarbloque2>
+0000000000010150 <escbranch4>:
+   10150:	14000054 	b	102a0 <escpintarbloque4>
 
-000000000001015c <esccontinuar2>:
-   1015c:	b5ffff42 	cbnz	x2, 10144 <escbranch2>
-   10160:	d28007a1 	mov	x1, #0x3d                  	// #61
+0000000000010154 <escontinuar4>:
+   10154:	d120014a 	sub	x10, x10, #0x800
+   10158:	d120014a 	sub	x10, x10, #0x800
+   1015c:	d120014a 	sub	x10, x10, #0x800
+   10160:	d120014a 	sub	x10, x10, #0x800
+   10164:	d1000442 	sub	x2, x2, #0x1
+   10168:	b5ffff42 	cbnz	x2, 10150 <escbranch4>
+   1016c:	5286c6c3 	mov	w3, #0x3636                	// #13878
+   10170:	d2800404 	mov	x4, #0x20                  	// #32
+   10174:	9120100a 	add	x10, x0, #0x804
 
-0000000000010164 <escbranch3>:
-   10164:	14000029 	b	10208 <escpintarbloque3>
+0000000000010178 <g>:
+   10178:	9120114a 	add	x10, x10, #0x804
+   1017c:	d1000484 	sub	x4, x4, #0x1
+   10180:	b5ffffc4 	cbnz	x4, 10178 <g>
+   10184:	d28005e2 	mov	x2, #0x2f                  	// #47
+   10188:	d2800601 	mov	x1, #0x30                  	// #48
 
-0000000000010168 <esccontinuar3>:
-   10168:	d1000421 	sub	x1, x1, #0x1
-   1016c:	d100414a 	sub	x10, x10, #0x10
-   10170:	b5ffffa1 	cbnz	x1, 10164 <escbranch3>
-   10174:	d28007a2 	mov	x2, #0x3d                  	// #61
+000000000001018c <escbranch5>:
+   1018c:	14000053 	b	102d8 <escpintarbloque5>
 
-0000000000010178 <escbranch4>:
-   10178:	14000032 	b	10240 <escpintarbloque4>
+0000000000010190 <esccontinuar5>:
+   10190:	d1000421 	sub	x1, x1, #0x1
+   10194:	9100414a 	add	x10, x10, #0x10
+   10198:	b5ffffa1 	cbnz	x1, 1018c <escbranch5>
+   1019c:	d100414a 	sub	x10, x10, #0x10
 
-000000000001017c <escontinuar4>:
-   1017c:	d120014a 	sub	x10, x10, #0x800
-   10180:	d120014a 	sub	x10, x10, #0x800
-   10184:	d120014a 	sub	x10, x10, #0x800
-   10188:	d120014a 	sub	x10, x10, #0x800
-   1018c:	d1000442 	sub	x2, x2, #0x1
-   10190:	b5ffff42 	cbnz	x2, 10178 <escbranch4>
-   10194:	14000039 	b	10278 <fiiiiiiiin>
+00000000000101a0 <escbranch6>:
+   101a0:	9120014a 	add	x10, x10, #0x800
+   101a4:	9120014a 	add	x10, x10, #0x800
+   101a8:	9120014a 	add	x10, x10, #0x800
+   101ac:	9120014a 	add	x10, x10, #0x800
+   101b0:	d1000442 	sub	x2, x2, #0x1
+   101b4:	f100085f 	cmp	x2, #0x2
+   101b8:	54000acc 	b.gt	10310 <escpintarbloque6>
 
-0000000000010198 <escpintarbloque>:
-   10198:	d280010c 	mov	x12, #0x8                   	// #8
+00000000000101bc <esccontinuar6>:
+   101bc:	b5ffff22 	cbnz	x2, 101a0 <escbranch6>
+   101c0:	d28005e1 	mov	x1, #0x2f                  	// #47
 
-000000000001019c <escxxx>:
-   1019c:	d280010b 	mov	x11, #0x8                   	// #8
+00000000000101c4 <escbranch7>:
+   101c4:	14000061 	b	10348 <escpintarbloque7>
 
-00000000000101a0 <escpintar>:
-   101a0:	78000143 	sturh	w3, [x10]
-   101a4:	9100094a 	add	x10, x10, #0x2
-   101a8:	d100056b 	sub	x11, x11, #0x1
-   101ac:	b5ffffab 	cbnz	x11, 101a0 <escpintar>
-   101b0:	910fc14a 	add	x10, x10, #0x3f0
-   101b4:	d100058c 	sub	x12, x12, #0x1
-   101b8:	b5ffff2c 	cbnz	x12, 1019c <escxxx>
-   101bc:	d120014a 	sub	x10, x10, #0x800
-   101c0:	d120014a 	sub	x10, x10, #0x800
-   101c4:	d120014a 	sub	x10, x10, #0x800
-   101c8:	d120014a 	sub	x10, x10, #0x800
-   101cc:	17ffffda 	b	10134 <esccontinuar>
+00000000000101c8 <esccontinuar7>:
+   101c8:	d1000421 	sub	x1, x1, #0x1
+   101cc:	d100414a 	sub	x10, x10, #0x10
+   101d0:	b5ffffa1 	cbnz	x1, 101c4 <escbranch7>
+   101d4:	d28005a2 	mov	x2, #0x2d                  	// #45
 
-00000000000101d0 <escpintarbloque2>:
-   101d0:	d280010c 	mov	x12, #0x8                   	// #8
+00000000000101d8 <escbranch8>:
+   101d8:	1400006a 	b	10380 <escpintarbloque8>
 
-00000000000101d4 <escxxx2>:
-   101d4:	d280010b 	mov	x11, #0x8                   	// #8
+00000000000101dc <escontinuar8>:
+   101dc:	d120014a 	sub	x10, x10, #0x800
+   101e0:	d120014a 	sub	x10, x10, #0x800
+   101e4:	d120014a 	sub	x10, x10, #0x800
+   101e8:	d120014a 	sub	x10, x10, #0x800
+   101ec:	d1000442 	sub	x2, x2, #0x1
+   101f0:	b5ffff42 	cbnz	x2, 101d8 <escbranch8>
+   101f4:	14000071 	b	103b8 <fiiiiiiiin>
 
-00000000000101d8 <escpintar2>:
-   101d8:	78000143 	sturh	w3, [x10]
-   101dc:	9100094a 	add	x10, x10, #0x2
-   101e0:	d100056b 	sub	x11, x11, #0x1
-   101e4:	b5ffffab 	cbnz	x11, 101d8 <escpintar2>
-   101e8:	910fc14a 	add	x10, x10, #0x3f0
-   101ec:	d100058c 	sub	x12, x12, #0x1
-   101f0:	b5ffff2c 	cbnz	x12, 101d4 <escxxx2>
-   101f4:	d120014a 	sub	x10, x10, #0x800
-   101f8:	d120014a 	sub	x10, x10, #0x800
-   101fc:	d120014a 	sub	x10, x10, #0x800
-   10200:	d120014a 	sub	x10, x10, #0x800
-   10204:	17ffffd6 	b	1015c <esccontinuar2>
+00000000000101f8 <escpintarbloque>:
+   101f8:	d280010c 	mov	x12, #0x8                   	// #8
 
-0000000000010208 <escpintarbloque3>:
-   10208:	d280010c 	mov	x12, #0x8                   	// #8
+00000000000101fc <escxxx>:
+   101fc:	d280010b 	mov	x11, #0x8                   	// #8
 
-000000000001020c <escxxx3>:
-   1020c:	d280010b 	mov	x11, #0x8                   	// #8
+0000000000010200 <escpintar>:
+   10200:	78000143 	sturh	w3, [x10]
+   10204:	9100094a 	add	x10, x10, #0x2
+   10208:	d100056b 	sub	x11, x11, #0x1
+   1020c:	b5ffffab 	cbnz	x11, 10200 <escpintar>
+   10210:	910fc14a 	add	x10, x10, #0x3f0
+   10214:	d100058c 	sub	x12, x12, #0x1
+   10218:	b5ffff2c 	cbnz	x12, 101fc <escxxx>
+   1021c:	d120014a 	sub	x10, x10, #0x800
+   10220:	d120014a 	sub	x10, x10, #0x800
+   10224:	d120014a 	sub	x10, x10, #0x800
+   10228:	d120014a 	sub	x10, x10, #0x800
+   1022c:	17ffffb7 	b	10108 <esccontinuar>
 
-0000000000010210 <escpintar3>:
-   10210:	78000143 	sturh	w3, [x10]
-   10214:	9100094a 	add	x10, x10, #0x2
-   10218:	d100056b 	sub	x11, x11, #0x1
-   1021c:	b5ffffab 	cbnz	x11, 10210 <escpintar3>
-   10220:	910fc14a 	add	x10, x10, #0x3f0
-   10224:	d100058c 	sub	x12, x12, #0x1
-   10228:	b5ffff2c 	cbnz	x12, 1020c <escxxx3>
-   1022c:	d120014a 	sub	x10, x10, #0x800
-   10230:	d120014a 	sub	x10, x10, #0x800
-   10234:	d120014a 	sub	x10, x10, #0x800
-   10238:	d120014a 	sub	x10, x10, #0x800
-   1023c:	17ffffcb 	b	10168 <esccontinuar3>
+0000000000010230 <escpintarbloque2>:
+   10230:	d280010c 	mov	x12, #0x8                   	// #8
 
-0000000000010240 <escpintarbloque4>:
-   10240:	d280010c 	mov	x12, #0x8                   	// #8
+0000000000010234 <escxxx2>:
+   10234:	d280010b 	mov	x11, #0x8                   	// #8
 
-0000000000010244 <escxxx4>:
-   10244:	d280010b 	mov	x11, #0x8                   	// #8
+0000000000010238 <escpintar2>:
+   10238:	78000143 	sturh	w3, [x10]
+   1023c:	9100094a 	add	x10, x10, #0x2
+   10240:	d100056b 	sub	x11, x11, #0x1
+   10244:	b5ffffab 	cbnz	x11, 10238 <escpintar2>
+   10248:	910fc14a 	add	x10, x10, #0x3f0
+   1024c:	d100058c 	sub	x12, x12, #0x1
+   10250:	b5ffff2c 	cbnz	x12, 10234 <escxxx2>
+   10254:	d120014a 	sub	x10, x10, #0x800
+   10258:	d120014a 	sub	x10, x10, #0x800
+   1025c:	d120014a 	sub	x10, x10, #0x800
+   10260:	d120014a 	sub	x10, x10, #0x800
+   10264:	17ffffb4 	b	10134 <esccontinuar2>
 
-0000000000010248 <escpintar4>:
-   10248:	78000143 	sturh	w3, [x10]
-   1024c:	9100094a 	add	x10, x10, #0x2
-   10250:	d100056b 	sub	x11, x11, #0x1
-   10254:	b5ffffab 	cbnz	x11, 10248 <escpintar4>
-   10258:	910fc14a 	add	x10, x10, #0x3f0
-   1025c:	d100058c 	sub	x12, x12, #0x1
-   10260:	b5ffff2c 	cbnz	x12, 10244 <escxxx4>
-   10264:	d120014a 	sub	x10, x10, #0x800
-   10268:	d120014a 	sub	x10, x10, #0x800
-   1026c:	d120014a 	sub	x10, x10, #0x800
-   10270:	d120014a 	sub	x10, x10, #0x800
-   10274:	17ffffc2 	b	1017c <escontinuar4>
+0000000000010268 <escpintarbloque3>:
+   10268:	d280010c 	mov	x12, #0x8                   	// #8
 
-0000000000010278 <fiiiiiiiin>:
-   10278:	17ffff91 	b	100bc <loop>
+000000000001026c <escxxx3>:
+   1026c:	d280010b 	mov	x11, #0x8                   	// #8
 
-000000000001027c <esperar>:
-   1027c:	d2a0020b 	mov	x11, #0x100000              	// #1048576
+0000000000010270 <escpintar3>:
+   10270:	78000143 	sturh	w3, [x10]
+   10274:	9100094a 	add	x10, x10, #0x2
+   10278:	d100056b 	sub	x11, x11, #0x1
+   1027c:	b5ffffab 	cbnz	x11, 10270 <escpintar3>
+   10280:	910fc14a 	add	x10, x10, #0x3f0
+   10284:	d100058c 	sub	x12, x12, #0x1
+   10288:	b5ffff2c 	cbnz	x12, 1026c <escxxx3>
+   1028c:	d120014a 	sub	x10, x10, #0x800
+   10290:	d120014a 	sub	x10, x10, #0x800
+   10294:	d120014a 	sub	x10, x10, #0x800
+   10298:	d120014a 	sub	x10, x10, #0x800
+   1029c:	17ffffa9 	b	10140 <esccontinuar3>
 
-0000000000010280 <delay1>:
-   10280:	d100056b 	sub	x11, x11, #0x1
-   10284:	b5ffffeb 	cbnz	x11, 10280 <delay1>
-   10288:	17ffff8c 	b	100b8 <loopx>
+00000000000102a0 <escpintarbloque4>:
+   102a0:	d280010c 	mov	x12, #0x8                   	// #8
+
+00000000000102a4 <escxxx4>:
+   102a4:	d280010b 	mov	x11, #0x8                   	// #8
+
+00000000000102a8 <escpintar4>:
+   102a8:	78000143 	sturh	w3, [x10]
+   102ac:	9100094a 	add	x10, x10, #0x2
+   102b0:	d100056b 	sub	x11, x11, #0x1
+   102b4:	b5ffffab 	cbnz	x11, 102a8 <escpintar4>
+   102b8:	910fc14a 	add	x10, x10, #0x3f0
+   102bc:	d100058c 	sub	x12, x12, #0x1
+   102c0:	b5ffff2c 	cbnz	x12, 102a4 <escxxx4>
+   102c4:	d120014a 	sub	x10, x10, #0x800
+   102c8:	d120014a 	sub	x10, x10, #0x800
+   102cc:	d120014a 	sub	x10, x10, #0x800
+   102d0:	d120014a 	sub	x10, x10, #0x800
+   102d4:	17ffffa0 	b	10154 <escontinuar4>
+
+00000000000102d8 <escpintarbloque5>:
+   102d8:	d280010c 	mov	x12, #0x8                   	// #8
+
+00000000000102dc <escxxx5>:
+   102dc:	d280010b 	mov	x11, #0x8                   	// #8
+
+00000000000102e0 <escpintar5>:
+   102e0:	78000143 	sturh	w3, [x10]
+   102e4:	9100094a 	add	x10, x10, #0x2
+   102e8:	d100056b 	sub	x11, x11, #0x1
+   102ec:	b5ffffab 	cbnz	x11, 102e0 <escpintar5>
+   102f0:	910fc14a 	add	x10, x10, #0x3f0
+   102f4:	d100058c 	sub	x12, x12, #0x1
+   102f8:	b5ffff2c 	cbnz	x12, 102dc <escxxx5>
+   102fc:	d120014a 	sub	x10, x10, #0x800
+   10300:	d120014a 	sub	x10, x10, #0x800
+   10304:	d120014a 	sub	x10, x10, #0x800
+   10308:	d120014a 	sub	x10, x10, #0x800
+   1030c:	17ffffa1 	b	10190 <esccontinuar5>
+
+0000000000010310 <escpintarbloque6>:
+   10310:	d280010c 	mov	x12, #0x8                   	// #8
+
+0000000000010314 <escxxx6>:
+   10314:	d280010b 	mov	x11, #0x8                   	// #8
+
+0000000000010318 <escpintar6>:
+   10318:	78000143 	sturh	w3, [x10]
+   1031c:	9100094a 	add	x10, x10, #0x2
+   10320:	d100056b 	sub	x11, x11, #0x1
+   10324:	b5ffffab 	cbnz	x11, 10318 <escpintar6>
+   10328:	910fc14a 	add	x10, x10, #0x3f0
+   1032c:	d100058c 	sub	x12, x12, #0x1
+   10330:	b5ffff2c 	cbnz	x12, 10314 <escxxx6>
+   10334:	d120014a 	sub	x10, x10, #0x800
+   10338:	d120014a 	sub	x10, x10, #0x800
+   1033c:	d120014a 	sub	x10, x10, #0x800
+   10340:	d120014a 	sub	x10, x10, #0x800
+   10344:	17ffff9e 	b	101bc <esccontinuar6>
+
+0000000000010348 <escpintarbloque7>:
+   10348:	d280010c 	mov	x12, #0x8                   	// #8
+
+000000000001034c <escxxx7>:
+   1034c:	d280010b 	mov	x11, #0x8                   	// #8
+
+0000000000010350 <escpintar7>:
+   10350:	78000143 	sturh	w3, [x10]
+   10354:	9100094a 	add	x10, x10, #0x2
+   10358:	d100056b 	sub	x11, x11, #0x1
+   1035c:	b5ffffab 	cbnz	x11, 10350 <escpintar7>
+   10360:	910fc14a 	add	x10, x10, #0x3f0
+   10364:	d100058c 	sub	x12, x12, #0x1
+   10368:	b5ffff2c 	cbnz	x12, 1034c <escxxx7>
+   1036c:	d120014a 	sub	x10, x10, #0x800
+   10370:	d120014a 	sub	x10, x10, #0x800
+   10374:	d120014a 	sub	x10, x10, #0x800
+   10378:	d120014a 	sub	x10, x10, #0x800
+   1037c:	17ffff93 	b	101c8 <esccontinuar7>
+
+0000000000010380 <escpintarbloque8>:
+   10380:	d280010c 	mov	x12, #0x8                   	// #8
+
+0000000000010384 <escxxx8>:
+   10384:	d280010b 	mov	x11, #0x8                   	// #8
+
+0000000000010388 <escpintar8>:
+   10388:	78000143 	sturh	w3, [x10]
+   1038c:	9100094a 	add	x10, x10, #0x2
+   10390:	d100056b 	sub	x11, x11, #0x1
+   10394:	b5ffffab 	cbnz	x11, 10388 <escpintar8>
+   10398:	910fc14a 	add	x10, x10, #0x3f0
+   1039c:	d100058c 	sub	x12, x12, #0x1
+   103a0:	b5ffff2c 	cbnz	x12, 10384 <escxxx8>
+   103a4:	d120014a 	sub	x10, x10, #0x800
+   103a8:	d120014a 	sub	x10, x10, #0x800
+   103ac:	d120014a 	sub	x10, x10, #0x800
+   103b0:	d120014a 	sub	x10, x10, #0x800
+   103b4:	17ffff8a 	b	101dc <escontinuar8>
+
+00000000000103b8 <fiiiiiiiin>:
+   103b8:	17ffff41 	b	100bc <InfLoop>
+
+00000000000103bc <esperar>:
+   103bc:	d2a0020b 	mov	x11, #0x100000              	// #1048576
+
+00000000000103c0 <delay1>:
+   103c0:	d100056b 	sub	x11, x11, #0x1
+   103c4:	8b1f0000 	add	x0, x0, xzr
+   103c8:	8b1f0000 	add	x0, x0, xzr
+   103cc:	8b1f0000 	add	x0, x0, xzr
+   103d0:	8b1f0000 	add	x0, x0, xzr
+   103d4:	b5ffff6b 	cbnz	x11, 103c0 <delay1>
+   103d8:	17ffff39 	b	100bc <InfLoop>

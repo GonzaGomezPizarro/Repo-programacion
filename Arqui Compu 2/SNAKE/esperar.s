@@ -3,9 +3,9 @@
 
 esperar:
 // --- Delay loop ---
-	movz x11, 0x10, lsl #16
+	movz x15, 0x10, lsl #16
 delay1: 
-	sub x11,x11,#1
-	cbnz x11, delay1
+	sub x15,x15,#1
+	cbnz x15, delay1
 	// ------------------
-    b loopx
+    b cont
