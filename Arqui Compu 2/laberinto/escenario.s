@@ -266,33 +266,63 @@ escpintar8:
 	b escontinuar8
 	
 fiiiiiiiin:
+	//PINTAMOS LA ZONA PARA GANAR	
+	add x10, x0, 0		// X10 contiene la dirección base del framebuffer
+loop2:
+	mov x2,512         	// Tamaño en Y
+loop1:
+	mov x1,512         	// Tamaño en X
+loop0:
+	add x10,x10,2	   	// Siguiente pixel
+	sub x1,x1,1	   		// Decrementar el contador X
+	cbnz x1,loop0	   	// Si no terminó la fila, saltar
+	sub x2,x2,1	   		// Decrementar el contador Y
+	cbnz x2,loop1	  	// Si no es la última fila, saltar
+	sub x10,x10,2
+	//ESTAMOS EN EL ULTIMO PIXEL
+	sub x10,x10,2048
+	sub x10,x10,2048
+	sub x10,x10,2048
 
-	//PINTAMOS EL PRIMER CUADRADO
-	//PINTAMOS EL PRIMER CUADRADO
+	mov w3, 0x00ee    
+	mov x13,x10
+	mov x12,40			// Contador de y
+aaaaa:
+	mov x11,8  			// Contador de x
+bbbbb:
+	sturh w3,[x13] 		// Setear el color del primer pixel del bloque
+	sub x13,x13,2	   	// Siguiente pixel (16 bits)
+	sub x11,x11,1	   	// decrementar el contador X
+	cbnz x11,bbbbb     // Si no es el 8vo pixel, saltar
+	sub x13,x13,1008 	// primer pixel de la siguiente fila +1024(siguiente fila)-16(vuelvo 8 columnas) = 1008
+	sub x12,x12,1 		// decrementar el contador de y
+	cbnz x12,aaaaa 		// si no es la ultima fila, saltar
 
- 	mov w3, 0xf0f0   	
+	//PINTAMOS EL PRIMER CUADRADO  	
 	add x10, x0, 0		// X10 contiene la dirección base del framebuffer
 
 	// 1 derecha 3 para abajo
 	add x10, x10, 16 // 1 derecha
 	mov x3, 12 // 4 iteraciones es 1 abajo
-ooo:
+oooo:
 	add x10, x10, 2048 
 	sub x3, x3, 1
-	cbnz x3, ooo
+	cbnz x3, oooo
 
-	mov x15, x10
+	mov x7, x10
 	mov x12,8			// Contador de y
-xxx:
+xxxv:
 	mov x11,8  			// Contador de x
-pintarr:
-	sturh w3,[x15] 		// Setear el color del primer pixel del bloque
-	add x15,x15,2	   	// Siguiente pixel (16 bits)
+hhhhhh:
+	sturh w3,[x7] 		// Setear el color del primer pixel del bloque
+	add x7,x7,2	   	// Siguiente pixel (16 bits)
 	sub x11,x11,1	   	// decrementar el contador X
-	cbnz x11,pintar     // Si no es el 8vo pixel, saltar
-	add x15,x15,1008 	// primer pixel de la siguiente fila +1024(siguiente fila)-16(vuelvo 8 columnas) = 1008
+	cbnz x11,hhhhhh     // Si no es el 8vo pixel, saltar
+	add x7,x7,1008 	// primer pixel de la siguiente fila +1024(siguiente fila)-16(vuelvo 8 columnas) = 1008
 	sub x12,x12,1 		// decrementar el contador de y
-	cbnz x12,xxx 		// si no es la ultima fila, saltar
+	cbnz x12,xxxv 		// si no es la ultima fila, saltar
+
+
 
 	b loop
 
